@@ -5,7 +5,7 @@ developmentMode = false
 # Увеличиваем лимит загрузки файлов до 50MB
 maxUploadSize = 50
 # Отключаем headless режим для локальной разработки
-headless = false
+headless = true
 # Автоматический перезапуск при изменениях
 runOnSave = true
 # Порт по умолчанию
