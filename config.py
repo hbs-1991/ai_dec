@@ -7,6 +7,21 @@ from dotenv import load_dotenv
 # Загружаем переменные окружения
 load_dotenv()
 
+# Проверяем, запущено ли в Streamlit
+try:
+    import streamlit as st
+    # В Streamlit Cloud используем secrets
+    OPENAI_API_KEY = st.secrets.get("OPENAI_API_KEY", os.getenv("OPENAI_API_KEY"))
+    VECTOR_STORE_ID = st.secrets.get("VECTOR_STORE_ID", os.getenv("VECTOR_STORE_ID"))
+except ImportError:
+    # Если Streamlit не доступен, используем только переменные окружения
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    VECTOR_STORE_ID = os.getenv("VECTOR_STORE_ID")
+except Exception:
+    # Если есть проблемы с secrets, используем переменные окружения
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    VECTOR_STORE_ID = os.getenv("VECTOR_STORE_ID")
+
 # Настройки приложения
 APP_TITLE = "AI DECLARANT - Определение кодов ТН ВЭД"
 APP_ICON = "📋"
@@ -21,10 +36,6 @@ SUPPORTED_FILE_TYPES = ["xlsx", "xls", "csv"]
 DEFAULT_CONFIDENCE_THRESHOLD = 80  # Высокий уровень доверия (≥80%)
 MIN_CONFIDENCE_THRESHOLD = 40     # Минимальный приемлемый уровень (≥40%)
 BATCH_SIZE = 10  # Количество позиций для параллельной обработки
-
-# OpenAI настройки
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-VECTOR_STORE_ID = os.getenv("VECTOR_STORE_ID")
 
 # Настройки интерфейса
 CONFIDENCE_COLORS = {
@@ -45,9 +56,10 @@ REQUIRED_COLUMNS = {
 EXPORT_FILENAME_PREFIX = "tnved_results"
 EXPORT_FORMATS = ["xlsx", "csv"]
 
-# Проверка критических настроек
+# Проверка критических настроек (мягкая проверка для демо)
 if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY не найден в переменных окружения!")
+    print("⚠️ OPENAI_API_KEY не найден!")
+    print("Для полной функциональности добавьте API ключ в настройки Streamlit Cloud.")
 
 # Логирование (для отладки)
 DEBUG_MODE = os.getenv("DEBUG", "False").lower() == "true" 
