@@ -1,0 +1,24 @@
+[global]
+developmentMode = false
+
+[server]
+# Увеличиваем лимит загрузки файлов до 50MB
+maxUploadSize = 50
+# Отключаем headless режим для локальной разработки
+headless = false
+# Автоматический перезапуск при изменениях
+runOnSave = true
+# Порт по умолчанию
+port = 8501
+
+[browser]
+# Автоматически открывать браузер
+gatherUsageStats = false
+
+[theme]
+# Настройки темы для профессионального вида
+primaryColor = "#1f77b4"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f0f2f6"
+textColor = "#262730"
+font = "sans serif" 

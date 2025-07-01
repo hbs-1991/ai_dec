@@ -1,0 +1,8 @@
+# AI DECLARANT - Переменные окружения
+# Скопируйте этот файл в .env и заполните значения
+
+# OpenAI API Key (обязательно)
+OPENAI_API_KEY=your_openai_api_key_here
+
+# Режим отладки (опционально)
+DEBUG=False 
